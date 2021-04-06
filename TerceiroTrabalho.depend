@@ -1,0 +1,225 @@
+# depslib dependency file v1.0
+1616264418 source:c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<windows.h>
+	"cliente.h"
+	"produtos.h"
+	"validacao.h"
+	"funcoesgerais.h"
+
+1616252124 c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\cliente.h
+
+1616264418 source:c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\cliente.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cliente.h"
+	"validacao.h"
+	"entradas.h"
+	"funcoesgerais.h"
+
+1616105897 c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\validacao.h
+
+1616264418 source:c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\validacao.c
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	"cliente.h"
+	"validacao.h"
+	"funcoesgerais.h"
+
+1616254431 c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\entradas.h
+
+1616264418 source:c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\entradas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	"cliente.h"
+	"validacao.h"
+	"entradas.h"
+	"funcoesgerais.h"
+
+1616264304 source:c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\funcoesgerais.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<windows.h>
+	"cliente.h"
+	"produtos.h"
+	"validacao.h"
+	"funcoesgerais.h"
+
+1616244902 c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\funcoesgerais.h
+
+1616255535 c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\produtos.h
+
+1616260258 source:c:\users\vitor\onedrive\햞ea de trabalho\trabalho2\terceirotrabalho\produtos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cliente.h"
+	"produtos.h"
+	"validacao.h"
+	"entradas.h"
+	"funcoesgerais.h"
+
+1616712010 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\cliente.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cliente.h"
+	"validacao.h"
+	"vendedor.h"
+	"entradas.h"
+	"funcoesgerais.h"
+
+1616365112 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\cliente.h
+
+1616349043 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\validacao.h
+
+1616348936 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\entradas.h
+
+1616717337 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\funcoesgerais.h
+
+1616624625 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\produtos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cliente.h"
+	"produtos.h"
+	"validacao.h"
+	"entradas.h"
+	"vendedor.h"
+	"funcoesgerais.h"
+
+1616614828 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\produtos.h
+
+1616375762 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\vendedor.h
+
+1616712010 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\entradas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<time.h>
+	"cliente.h"
+	"validacao.h"
+	"vendedor.h"
+	"fornecedor.h"
+	"entradas.h"
+	"funcoesgerais.h"
+
+1616725423 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\funcoesgerais.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	"cliente.h"
+	"produtos.h"
+	"vendedor.h"
+	"fornecedor.h"
+	"validacao.h"
+	"funcoesgerais.h"
+
+1616725683 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	"cliente.h"
+	"produtos.h"
+	"vendedor.h"
+	"fornecedor.h"
+	"validacao.h"
+	"vendas.h"
+	"compra.h"
+	"relatorios.h"
+	"funcoesgerais.h"
+
+1616725584 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\validacao.c
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	"cliente.h"
+	"vendedor.h"
+	"validacao.h"
+	"fornecedor.h"
+	"funcoesgerais.h"
+
+1616725507 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\vendedor.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cliente.h"
+	"vendedor.h"
+	"entradas.h"
+	"validacao.h"
+	"funcoesgerais.h"
+
+1616449357 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\fornecedor.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cliente.h"
+	"validacao.h"
+	"vendedor.h"
+	"fornecedor.h"
+	"entradas.h"
+	"funcoesgerais.h"
+
+1616376588 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\fornecedor.h
+
+1616712010 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\vendas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cliente.h"
+	"produtos.h"
+	"vendedor.h"
+	"fornecedor.h"
+	"validacao.h"
+	"vendas.h"
+	"funcoesgerais.h"
+
+1616535542 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\vendas.h
+
+1616712010 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\compra.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cliente.h"
+	"produtos.h"
+	"vendedor.h"
+	"fornecedor.h"
+	"validacao.h"
+	"vendas.h"
+	"compra.h"
+	"funcoesgerais.h"
+
+1616549209 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\compra.h
+
+1616722222 c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\relatorios.h
+
+1616724248 source:c:\users\vitor\onedrive\햞ea de trabalho\terceirotrabalho\relatorios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cliente.h"
+	"produtos.h"
+	"vendedor.h"
+	"fornecedor.h"
+	"validacao.h"
+	"vendas.h"
+	"compra.h"
+	"relatorios.h"
+	"funcoesgerais.h"
+
