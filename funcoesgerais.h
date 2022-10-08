@@ -1,12 +1,34 @@
-#ifndef FUNCOESGERAIS_H_INCLUDED
-#define FUNCOESGERAIS_H_INCLUDED
-void busca_ID(FILE*,unsigned long,int);
-void busca_cpf(FILE*,char*,int);
-void busca_prefixo(FILE*,char*,int);
-void listagem(FILE*,int);
-int verifica_senha(FILE *,char*,unsigned long);
-void busca_cnpj(FILE*,char*);
-void data_sistema(char *);
-int recebe_data(char *);
-void separa_data(char*,int*,int*,int*);
-#endif // FUNCOESGERAIS_H_INCLUDED
+#ifndef FUNCOES_GERAIS_H_INCLUDED
+#define FUNCOES_GERAIS_H_INCLUDED
+#include <stdio.h>
+/*
+    EFETUA A ABERTURA DE UM ARQUIVO
+    PARAMETROS:nomeArq(NOME DO ARQUIVO A SER ABERTO COM A EXTENSSÃO),arq(LOCAL ONDE O ENDEREÇO DE MEMÓRIA DO ARQUIVO SERÁ ARMAZENADO)
+    RETORNOS: RETORNA 1 SE CONSEGUIR ABRIR O ARQUIVO, RETORNA 0 SE FALHAR AO ABRIR O ARQUIVO
+*/
+int abrirArquivo(char *nomeArq,FILE **arq);
+/*
+    EFETUA A PADRONIZAÇÃO DE UMA STRING REMOVENDO SUA ACENTUAÇÃO E DEIXANDO TODOS OS CARACTERES EM MAIUSCULO
+    PARAMETROS: str(STRING QUE DEVE SER PADRONIZADA)
+    RETORNOS: void
+*/
+void padronizaString(char *str);
+/*REMOVE A QUEBRA DE LINHA DE UM STRING
+  PARAMETROS: str(STRING QUE TERA A QUEBRA DE LINHA REMOVIDA)
+  RETORNOS: void
+*/
+void retiraN(char *str);
+
+/*COLOCA NA STRING PASSADA POR PARAMETRO A DATA ATUAL DO SISTEMA
+  PARAMETROS: str(STRING QUE RECEBERA A DATA ATUAL DO SISTEMA)
+  RETORNOS: void*/
+void dataSistema(char *str);
+
+/*
+  VERIFICA SE A PRIMEIRA DATA É MAIOR QUE A SEGUNDA
+  PARAMETROS: data1(data no formato DD-mm-AAAA), data2(data no formato DD-mm-AAAA)
+  RETORNOS: RETORNA 1 SE A PRIMEIRA DATA FOR MAIOR E 0 SE A SEGUNDA DATA FOR MAIOR QUE A PRIMEIRA
+*/
+int dataMaior(char *data1, char *data2);
+
+#endif // FUNCOES_GERAIS_H_INCLUDED

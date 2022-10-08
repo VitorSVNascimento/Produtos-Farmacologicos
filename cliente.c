@@ -1,371 +1,169 @@
+#include "cliente.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "cliente.h"
-#include "validacao.h"
-#include "vendedor.h"
-#include "entradas.h"
-#include "funcoesgerais.h"
 
+struct Cliente {
 
+    unsigned long id;
+    char nome[100];
+    char cpf[12];
+    char email[50];
+    char telefone[15];
 
+};
 
-void mCliente(){
-int sair;
-FILE *f;
+unsigned long getIdCliente(TCliente cliente){
+    return cliente->id;
+}
 
-f=fopen("cliente.dat","rb+");
-if(f==NULL)
-f=fopen("cliente.dat","wb+");
-if(f!=NULL){
+void setIdCliente(TCliente cliente, unsigned long id){
+    cliente->id = id;
+}
 
-do{
- printf("\n|----------------Menu de Clientes-----------------------");
- printf("\n|O que deseja Fazer");
- printf("\n|1-Cadastrar Clientes");
- printf("\n|2-Alterar Clientes");
- printf("\n|3-Consultar Clientes");
- printf ("\n|4Excluir Cliente");
- printf ("\n|5-Menu pricipal");
- printf("\n|Opção:");
- scanf ("%d",&sair);
+void getNomeCliente(TCliente cliente, char *nome){
+    strcpy(nome, cliente->nome);
+}
 
+void setNomeCliente(TCliente cliente, char *nome){
+    strcpy(cliente->nome, nome);
+}
 
-switch(sair){
+void getCpfCliente(TCliente cliente, char *cpf){
+    strcpy(cpf, cliente->cpf);
+}
 
-case 1:
+void setCpfCliente(TCliente cliente, char *cpf){
+    strcpy(cliente->cpf, cpf);
+}
 
-cadCliente(f);
-break;
+void getEmailCliente(TCliente cliente, char *email){
+    strcpy(email, cliente->email);
+}
 
-case 2:
-alterCliente(f);
+void setEmailCliente(TCliente cliente, char *email){
+    strcpy(cliente->email, email);
+}
 
+void getTelefoneCliente(TCliente cliente, char *telefone){
+    strcpy(telefone, cliente->telefone);
+}
 
-break;
-case 3:
-consCliente(f);
+void setTelefoneCliente(TCliente cliente, char *telefone){
+    strcpy(cliente->telefone, telefone);
+}
 
-break;
+int tamStruct(){
+    return sizeof(struct Cliente);
+}
 
-case 4:
- delCliente(f);
-break;
+TCliente novoCliente(){
+
+    TCliente cliente=(TCliente)malloc(tamStruct());
+    if(cliente)
+        return cliente;
+    return NULL;
 
 }
 
-
-}while(sair!=5);
-
-
-fclose(f);
-}else
-printf("Impossivel abrir o arquivo");
-return ;
+void inserirClienteNaPosicao(TCliente cliente,FILE *arq,unsigned long posicao){
+    fseek(arq,tamStruct()*posicao,SEEK_SET);
+    fwrite(cliente,tamStruct(),1,arq);
 }
 
+unsigned long novoIdCliente(FILE *f){
 
-//-----------------------------------função de cadastro-------------------------------------------------------------------------
+    unsigned long id;
+    TCliente novo = novoCliente();
 
-void cadCliente(FILE *file){
+    id=1;
+    fseek(f,0,SEEK_SET);
+    while(fread(novo,tamStruct(),1,f)==1){
 
-t_cliente novo;
-int menu,tipo=1;
-unsigned long posicao;
+        if(novo->id==0)
+            break;
 
-
-do{
-novo.id=novo_ID(file);
-
-printf("\nID do cliente:|%lu",novo.id);
-
-recebe_nome(novo.nome);
-
-recebe_cpf(novo.cpf,file,tipo);
-
-recebe_email(novo.email);
-
-recebe_telefone(novo.telefone);
-
-setbuf(stdin,NULL);
-
-posicao=novo.id-1;
-//coloca o novo cliente no fim do arquivo
-fseek(file,sizeof(t_cliente)*posicao,SEEK_SET);
-    fwrite(&novo,sizeof(t_cliente),1,file);
-
-printf("\n----------------------------------CADASTRO CONCLUIDO------------------------------------------------------------");
-printf("\nDeseja continuar cadastrando???");
-printf("\n1-Sim|2-Não");
-printf("\nOpção:");
-scanf("%d",&menu);
-}while (menu==1);
-}
-
-//------------------------------------------------------FUNÇÃO DE ID---------------------------------------------------------------
-
-unsigned long novo_ID(FILE *file){
-
-unsigned long id;
-t_cliente novo;
-//loop que incrementa o id enquanto o arquivo não estiver acabado
-id=1;
-fseek(file,0,SEEK_SET);
-while(fread(&novo,sizeof (t_cliente),1,file)==1){
-
-if(novo.id==0)
-break;
-
-id++;
-
-}
-
-return id;
-
-}
-
-
-//--------------------------------FIM DA FUNÇÕES DE CADASTROS---------------------------------------------------------------------Q
-
-//------------------------------------MENU DE ALTERAÇÃO-----------------------------------------------------------------------------
-
-void alterCliente(FILE *file){
-unsigned long id,posicao;
-int achou,s_n;
-
-
-t_cliente novo;
-
-do{
-printf("\n-----------------Menu de Alteração de Cliente-----------------------");
-printf("\nForneça o Id que deseja alterar:");
-scanf("%lu",&id);
-
-if(id!=0){
-achou =0;
-//loop que procura o id
-fseek(file,0,SEEK_SET);
-while(fread(&novo,sizeof (t_cliente),1,file)==1&&achou==0){
-
-if(id==novo.id){
-  achou=1;}else posicao ++;
-
-  }
-if(achou==1){
-        //loop que busca o cliente pedido e mostra os dados atuais
-fseek(file,sizeof(t_cliente)*posicao,SEEK_SET);
-fread(&novo,sizeof(t_cliente),1,file);
-
-    printf("\n|---------------Dados atuais--------------------|");
-    printf("\n|ID:%lu",novo.id);
-    printf("\n|Nome:%s",novo.nome);
-    printf("\n|CPF:%s",novo.cpf);
-    printf("\n|EMAIL:%s",novo.email);
-    printf("\n|TELEFONE:%s",novo.telefone);
-    printf("\n|-----------------------------------------------|");
-
-    printf("\nDeseja Realmente alterar?");
-    printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf ("%d",&s_n);
-
-    if(s_n==1){
-
-    printf("\nDeseja alterar o nome???");
-
-   printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf("%d",&s_n);
-
-        if(s_n==1)
-        recebe_nome(novo.nome);
-
-    printf("\nDeseja alterar o e-mail???");
-
-    printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf("%d",&s_n);
-
-        if(s_n==1)
-        recebe_email(novo.email);
-    printf("\nDeseja alterar o telefone???");
-
-    printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf("%d",&s_n);
-
-        if(s_n==1)
-        recebe_telefone(novo.telefone);
-
-fseek(file,sizeof(t_cliente)*posicao,SEEK_SET);
-fwrite(&novo,sizeof(t_cliente),1,file);
+        id++;
 
     }
-    printf("\n|---------------Alteração Concluida--------------------|");
-    printf("\n|-----------------Dados atuais-------------------------|");
-    printf("\n|ID:%lu",novo.id);
-    printf("\n|Nome:%s",novo.nome);
-    printf("\n|CPF:%s",novo.cpf);
-    printf("\n|EMAIL:%s",novo.email);
-    printf("\n|TELEFONE:%s",novo.telefone);
-    printf("\n|------------------------------------------------------|");
-
-
-}else
-printf("\n---------ID não encontrado---------");
-
-
-}else
-printf("\n---------ID não encontrado---------");
-
-    printf("\nFazer mais alguma alteração???");
-    printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf ("%d",&s_n);
-}while(s_n==1);
-
-}
-//----------------------------------------------FIM DAS FUNÇÕES DE ALTERAÇÃO------------------------------------------------------
-
-//---------------------------------------------MENU DE CONSULTA-------------------------------------------------------------------
-
-void consCliente(FILE *file){
-
-int tipo=1;
-int opcao,s_n;
-unsigned long id;
-char cpf[12],prefixo[100];
-
-
-do{
-printf("\n|-----------------Menu de Consulta-----------------------|");
-printf("\n|-----------Como deseja realizar a consulta?-------------|");
-printf("\n|1-Consulta por id");
-printf("\n|2-Consulta por CPF ");
-printf("\n|3-Consulta por Prefixo");
-printf("\n|4-Listar todos os clientes");
-printf("\n|5-Voltar");
-printf("\n|Opção:");
-scanf("%d",&opcao);
-switch (opcao){
-
-case 1:
-do{
-printf("\n|-----------------Busca Por ID---------------------------|");
-printf("\n|Forneça o id:");
-scanf("%lu",&id);
-if(id!=0)
-busca_ID(file,id,tipo);
-else
-printf("ID NÃO ENCONTRADO");
-
-    printf("\nFazer mais alguma consulta por ID???");
-    printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf ("%d",&s_n);
-
-}while(s_n==1);
-
-break;
-
-
-
-
-case 2:
-
-
-    do{
-        printf("\n|-----------------Busca Por CPF---------------------------|");
-         printf("\n|Forneça o CPF:");
-          setbuf(stdin,NULL);
-            fgets(cpf,12,stdin);
-             retira_n(cpf);
-             busca_cpf(file,cpf,tipo);
-
-
-    printf("\nFazer mais alguma consulta por CPF???");
-    printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf ("%d",&s_n);
-
-}while(s_n==1);
-break;
-
-case 3:
-
-
-    do{    printf("\n|---------------Busca Por Prefixo-------------------------|");
-         printf("\n|Forneça o Prefixo:");
-          setbuf(stdin,NULL);
-            fgets(prefixo,100,stdin);
-             retira_n(prefixo);
-               nome_maiusculo(prefixo);
-                 busca_prefixo(file,prefixo,tipo);
-
-
-    printf("\nFazer mais alguma consulta por prefixo???");
-    printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf ("%d",&s_n);
-
-    }while(s_n==1);
-break;
-
-
-case 4:
- listagem(file,tipo);
-
-
-break;
-case 5:
-break;
+    liberaCliente(novo);
+    return id;
 }
 
-}while(opcao!=5);
-}
-//---------------------------------------------------FIM DAS FUNÇÕES DE CONSULTA--------------------------------------------------
+void inicializarCliente(TCliente cliente,unsigned long id,char *nome,char *cpf, char *email, char *telefone){
 
-//--------------------------------------------------------EXCLUSÃO----------------------------------------------------------------
+    cliente->id=id;
+    strcpy(cliente->nome,nome);
+    strcpy(cliente->cpf,cpf);
+    strcpy(cliente->email,email);
+    strcpy(cliente->telefone,telefone);
+    return;
 
-void delCliente(FILE *file){
-unsigned long id,posicao;
-int achou,s_n;
-t_cliente excluir;
-
-do{
-printf("\nForneça o Id do cliente que deseja excluir");
-scanf("%lu",&id);
-
-achou=0;
-fseek(file,0,SEEK_SET);
-while(fread(&excluir,sizeof(t_cliente),1,file)==1&&achou==0){
-
- if(id==excluir.id){
-    achou=1;}else posicao++;
- }
-  fseek(file,sizeof(t_cliente)*posicao,SEEK_SET);
-    fread(&excluir,sizeof(t_cliente),1,file);
-if(achou==1 && excluir.id!=0){
-        printf("\n|---------------Dados atuais--------------------|");
-    printf("\n|ID:%lu",excluir.id);
-    printf("\n|Nome:%s",excluir.nome);
-    printf("\n|CPF:%s",excluir.cpf);
-    printf("\n|EMAIL:%s",excluir.email);
-    printf("\n|TELEFONE:%s",excluir.telefone);
-    printf("\n|-----------------------------------------------|");
-
-    printf("\nDeseja Realmente excluir?");
-    printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf ("%d",&s_n);
-
-    if(s_n==1){
-
-        excluir.id=0;
-        strcpy(excluir.cpf,"0");
-        fseek(file,sizeof(t_cliente)*posicao,SEEK_SET);
-        fwrite(&excluir,sizeof(t_cliente),1,file);
-
-    }else printf("Nada foi excluido");
-}else printf("ID NÃO ENCONTRADO");
-    printf("\nFazer mais alguma exclusão???");
-    printf("\n|1-Sim|n2-Não\n|Opção:");
-    scanf ("%d",&s_n);
-
-    }while(s_n==1);
-//exclui os dados colocando o valor 0 para o id e para os campos unicos
 }
 
+void liberaCliente(TCliente cliente){
+    free(cliente);
+}
 
+unsigned long buscaCpfCliente(char *cpf,FILE *file){
+    TCliente busca = novoCliente();
+    int achou=0,posicao=0;
 
+    fseek(file,0,SEEK_SET);
+    while(fread(busca,tamStruct(),1,file)==1&&!achou)
+        (strcmp(cpf,busca->cpf)==0 && busca->id>0)? achou=1:posicao++;
+    liberaCliente(busca);
+    if(achou)
+        return posicao;
+    return -1;
+}
+
+unsigned long buscaIdCliente(unsigned long id, FILE *file){
+    TCliente busca = novoCliente();
+    int achou=0,posicao=0;
+
+    fseek(file,0,SEEK_SET);
+    while(fread(busca,tamStruct(),1,file)==1&&!achou)
+        (busca->id==id)? achou=1:posicao++;
+    liberaCliente(busca);
+    if(achou)
+        return posicao;
+    return -1;
+
+}
+
+void excluirCliente(TCliente c,FILE *f, unsigned long posicao){
+    c->id=0;
+    inserirClienteNaPosicao(c,f,posicao);
+
+}
+
+unsigned long buscaPrefixoCliente(char *pre,FILE *file, unsigned long posInicial){
+    TCliente busca = novoCliente();
+    int achou=0,posicao=0,tam = strlen(pre);
+    fseek(file,tamStruct() * posInicial,SEEK_SET);
+    while(fread(busca,tamStruct(),1,file)==1&&!achou)
+        (strncmp(pre,busca->nome,tam)==0 && busca->id>0)? achou=1:posicao++;
+
+    liberaCliente(busca);
+    if(achou)
+        return posicao + posInicial;
+    return -1;
+}
+
+void atribuirDadosCliente(TCliente c,unsigned long posicao,FILE *f){
+        fseek(f,tamStruct()*posicao,SEEK_SET);
+        fread(c,tamStruct(),1,f);
+        return ;
+}
+
+unsigned long registroValidos(FILE *f){
+    unsigned long total=0;
+    TCliente c = novoCliente();
+    fseek(f,0,SEEK_SET);
+    while(fread(c,tamStruct(),1,f))
+        if(c->id)
+            total++;
+    liberaCliente(c);
+    return total;
+}

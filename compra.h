@@ -1,40 +1,20 @@
 #ifndef COMPRA_H_INCLUDED
 #define COMPRA_H_INCLUDED
+#include <stdio.h>
+typedef struct NotaCompra *TNotaCompra;
+unsigned long getIdNotaCompra(TNotaCompra nota);
+unsigned long getIdFornecedorNotaCompra(TNotaCompra nota);
+void setIdNotaCompra(TNotaCompra nota,unsigned long id);
+void setIdFornecedorNotaCompra(TNotaCompra nota,unsigned long id);
 
-typedef struct{
-unsigned long id;
-unsigned long idFornecedor;
-char dataCompra[11];
-float valorTotal;
-
-}nota_compra;
-
-typedef struct{
-unsigned long id;
-unsigned long idProduto;
-unsigned long idNotaCompra;
-unsigned int quantidade;
-float valorUnitario;
-
-
-}item_nota_compra;
-
-void mCompra();
-void menuCompras(FILE *,unsigned long idv);
-void finaliza_venda(unsigned long,carrinho,FILE *,FILE *);
-unsigned long gera_IDNC(FILE *);
-unsigned long gera_IDINC(FILE *);
-
-
-
-
-
-
-
-
-
-
-
-
-
+void getDataCompra(TNotaCompra nota,char *receptorData);
+void setDataCompra(TNotaCompra nota,char *receptorData);
+float getValorTotalNotaCompra(TNotaCompra nota);
+int tamStructNotaCompra();
+TNotaCompra novoNotaCompra();
+void liberaNotaCompra(TNotaCompra nota);
+unsigned long novoIdNotaCompra(FILE *f);
+void inicializarNotaCompra(TNotaCompra nota,unsigned long id,unsigned long idFornecedor,char *data, float total);
+unsigned long buscaIdNotaCompra(unsigned long id,FILE *f);
+void atribuirDadosNotaCompra(TNotaCompra nota,unsigned long posicao,FILE *f);
 #endif // COMPRA_H_INCLUDED
